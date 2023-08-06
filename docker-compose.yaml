@@ -20,7 +20,7 @@ services:
       - 127.0.0.1
       - 1.1.1.1
     networks:
-      picertnet:
+      pinets:
         ipv4_address: 10.11.12.2 # Assign an IP address within the custom subnet
     restart: unless-stopped
 
@@ -61,4 +61,4 @@ services:
 
 networks:
   pinets:
-    external: true 
+    external: true
