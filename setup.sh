@@ -11,13 +11,13 @@ if [[ -f /etc/os-release ]]; then
     source /etc/os-release
     if [[ $ID == "ubuntu" || $ID == "fedora" ]]; then
         echo "Detected supported OS: $ID $VERSION_ID"
-        
+
         # Disable systemd-resolved DNSStubListener
         sudo sed -r -i.orig 's/#?DNSStubListener=yes/DNSStubListener=no/g' /etc/systemd/resolved.conf
-        
+
         # Change /etc/resolv.conf symlink to point to /run/systemd/resolve/resolv.conf
         sudo sh -c 'rm /etc/resolv.conf && ln -s /run/systemd/resolve/resolv.conf /etc/resolv.conf'
-        
+
         # Restart systemd-resolved
         sudo systemctl restart systemd-resolved
 
@@ -39,6 +39,15 @@ UPSTREAMDNS1=${UPSTREAMDNS1:-https://dns.quad9.net/dns-query}  # Set default if 
 read -p "Enter DNS2 (default: https://cloudflare-dns.com/dns-query): " UPSTREAMDNS2
 UPSTREAMDNS2=${UPSTREAMDNS2:-https://cloudflare-dns.com/dns-query}  # Set default if empty
 
+# If the user didn't enter anything, use the provided default URLs
+if [ -z "$UPSTREAMDNS1" ]; then
+    UPSTREAMDNS1="https://dns.quad9.net/dns-query"
+fi
+
+if [ -z "$UPSTREAMDNS2" ]; then
+    UPSTREAMDNS2="https://cloudflare-dns.com/dns-query"
+fi
+
 # Ask user for timezone
 read -p "Enter your timezone (default: Etc/UTC): " TIMEZONE
 TIMEZONE=${TIMEZONE:-Etc/UTC}  # Set default if empty
@@ -49,12 +58,10 @@ read -s PIHOLE_PASSWORD
 echo  # Move to a new line
 
 # Generate .env file
-cat << EOF > .env
-UPSTREAMDNS1=$UPSTREAMDNS1
-UPSTREAMDNS2=$UPSTREAMDNS2
-TIMEZONE=$TIMEZONE
-PIHOLE_PASSWORD=$PIHOLE_PASSWORD
-EOF
+echo "UPSTREAMDNS1=$UPSTREAMDNS1" > .env
+echo "UPSTREAMDNS2=$UPSTREAMDNS2" >> .env
+echo "TIMEZONE=$TIMEZONE" >> .env
+echo "PIHOLE_PASSWORD=$PIHOLE_PASSWORD" >> .env
 
 echo "Environment variables have been saved to .env file."
 
@@ -66,7 +73,8 @@ fi
 
 # Move the Unbound folder to ~/docker_stuff
 if [ -d unbound ]; then
-    mv unbound ~/docker_stuff
+    mkdir -p ~/docker_stuff/unbound
+    mv unbound/* ~/docker_stuff/unbound
 fi
 
 # Verify the presence of required files
