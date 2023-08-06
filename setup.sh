@@ -20,6 +20,10 @@ if [[ -f /etc/os-release ]]; then
         
         # Restart systemd-resolved
         sudo systemctl restart systemd-resolved
+
+        # Append "nameserver 1.1.1.1" using cat
+        echo "nameserver 1.1.1.1" | sudo tee -a /etc/resolv.conf > /dev/null
+        echo -e "Your System dns is set to 1.1.1.1(Cloudflare)"
     fi
 else
     echo "Cannot determine OS."
