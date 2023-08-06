@@ -15,6 +15,9 @@ These instructions will help you set up PiNets on your system.
 ### Prerequisites
 
 - Docker and Docker Compose are required for running the containers. If not installed, follow the instructions for [Docker](https://docs.docker.com/get-docker/) and [Docker Compose](https://docs.docker.com/compose/install/).
+- For debain based(ubuntu):
+  ```sh
+  sudo apt update && sudo apt install docker.io docker-compose git -y
 
 ### Installation
 
