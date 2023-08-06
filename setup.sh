@@ -89,7 +89,12 @@ done
 # Start containers using docker-compose
 docker-compose up -d
 
+PUBIP=$(curl -s https://checkip.amazonaws.com)
+PRIIP=$(ip -o -4 addr show eth0 | awk '{print $4}' | cut -d'/' -f1)
+
+echo -e "\n PUBLIC: https://${PUBIP}/admin/ \n PRIVATE: https://${PRIIP}/admin/"
+
 # Display generated password if it was randomly generated
 if [ -z "$PIHOLE_PASSWORD" ]; then
-    echo -e "\n$(docker logs pihole 2> /dev/null | grep 'password:') for your pi-hole: https://${IP}/admin/"
+    echo -e "\n$(sudo docker logs pihole 2> /dev/null | grep 'password:') for your pi-hole"
 fi
