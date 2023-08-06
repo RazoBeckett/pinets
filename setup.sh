@@ -61,7 +61,9 @@ if ! docker network inspect pinets >/dev/null 2>&1; then
 fi
 
 # Move the Unbound folder to ~/docker_stuff
-mv unbound ~/docker_stuff
+if [ -d unbound ]; then
+    mv unbound ~/docker_stuff
+fi
 
 # Verify the presence of required files
 required_files=("a-records.conf" "unbound.conf" "srv-records.conf" "unbound.log" "forward-records.conf")
