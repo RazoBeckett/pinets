@@ -24,7 +24,7 @@ These instructions will help you set up PiNets on your system.
 1. Clone this repository to your local machine:
 
    ```sh
-   git clone https://github.com/razobeckett/PiNets.git
+   git clone https://github.com/razobeckett/pinets.git
 
 2. Navigate to the project directory:
 
