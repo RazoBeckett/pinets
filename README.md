@@ -35,7 +35,7 @@ These instructions will help you set up PiNets on your system.
 
    ```sh
    sudo chmod u+x setup.sh
-   ./setup.sh
+   sudo ./setup.sh
 
 ### Contributing
 Contributions are welcome! If you find any issues or have suggestions, feel free to open an issue or create a pull request.
