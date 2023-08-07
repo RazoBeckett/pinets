@@ -1,12 +1,12 @@
-# PiNets: [PiHole](https://github.com/pi-hole/docker-pi-hole/) + [Unbound](https://github.com/MatthewVance/unbound-docker) + [Cloudflared](https://github.com/cloudflare/cloudflared)
+# PiNets: Pihole + Unbound + Cloudflared
 
 PiNets is a project that combines PiHole, Unbound, and Cloudflared to create a secure and efficient network-wide ad-blocking and DNS-over-HTTPS solution.
 
 ## Features
 
-- PiHole: Network-wide ad-blocking using DNS-based blacklists.
-- Unbound: Local caching DNS resolver for improved speed and privacy.
-- Cloudflared: DNS-over-HTTPS (DoH) proxy for secure and encrypted DNS queries.
+- [PiHole](https://github.com/pi-hole/docker-pi-hole/): Network-wide ad-blocking using DNS-based blacklists.
+- [Unbound](https://github.com/MatthewVance/unbound-docker): Local caching DNS resolver for improved speed and privacy.
+- [Cloudflared](https://github.com/cloudflare/cloudflared): DNS-over-HTTPS (DoH) proxy for secure and encrypted DNS queries.
 
 ## Getting Started
 
