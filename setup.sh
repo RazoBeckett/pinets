@@ -41,11 +41,19 @@ UPSTREAMDNS2=${UPSTREAMDNS2:-https://cloudflare-dns.com/dns-query}  # Set defaul
 
 # If the user didn't enter anything, use the provided default URLs
 if [ -z "$UPSTREAMDNS1" ]; then
+<<<<<<< HEAD
     UPSTREAMDNS1=https://dns.quad9.net/dns-query
 fi
 
 if [ -z "$UPSTREAMDNS2" ]; then
     UPSTREAMDNS2=https://cloudflare-dns.com/dns-query
+=======
+    UPSTREAMDNS1="https://dns.quad9.net/dns-query"
+fi
+
+if [ -z "$UPSTREAMDNS2" ]; then
+    UPSTREAMDNS2="https://cloudflare-dns.com/dns-query"
+>>>>>>> 3650b9d94c7bc4618047a89c70c62c514a7d26ba
 fi
 
 # Ask user for timezone
@@ -58,6 +66,7 @@ read -s PIHOLE_PASSWORD
 echo  # Move to a new line
 
 # Generate .env file
+<<<<<<< HEAD
 echo "UPSTREAM1=$UPSTREAMDNS1" > .env
 echo "UPSTREAM2=$UPSTREAMDNS2" >> .env
 echo "TIMEZONE=$TIMEZONE" >> .env
@@ -70,6 +79,12 @@ UPSTREAM2=$UPSTREAMDNS2
 TIMEZONE=$TIMEZONE
 PIHOLE_PASSWORD=$PIHOLE_PASSWORD
 EOF
+=======
+echo "UPSTREAMDNS1=$UPSTREAMDNS1" > .env
+echo "UPSTREAMDNS2=$UPSTREAMDNS2" >> .env
+echo "TIMEZONE=$TIMEZONE" >> .env
+echo "PIHOLE_PASSWORD=$PIHOLE_PASSWORD" >> .env
+>>>>>>> 3650b9d94c7bc4618047a89c70c62c514a7d26ba
 
 echo "Environment variables have been saved to .env file."
 
@@ -80,7 +95,11 @@ if ! docker network inspect pinets >/dev/null 2>&1; then
 fi
 
 # Move the Unbound folder to ~/docker_stuff
+<<<<<<< HEAD
 if ! [ -d ~/docker_stuff/unbound ]; then
+=======
+if [ -d unbound ]; then
+>>>>>>> 3650b9d94c7bc4618047a89c70c62c514a7d26ba
     mkdir -p ~/docker_stuff/unbound
     mv unbound/* ~/docker_stuff/unbound
 fi
@@ -97,14 +116,25 @@ done
 # Start containers using docker-compose
 docker-compose up -d
 
+<<<<<<< HEAD
 sed -i '/^PIHOLE_PASSWORD=/d' .env
 
 PUBIP=$(curl -s https://checkip.amazonaws.com)
 PRIIP=$(ip -o -4 addr show eth0 | awk '{print $4}' | cut -d'/' -f1)
 
 echo -e "\n PUBLIC: http://${PUBIP}/admin/ \n PRIVATE: http://${PRIIP}/admin/"
+=======
+PUBIP=$(curl -s https://checkip.amazonaws.com)
+PRIIP=$(ip -o -4 addr show eth0 | awk '{print $4}' | cut -d'/' -f1)
+
+echo -e "\n PUBLIC: https://${PUBIP}/admin/ \n PRIVATE: https://${PRIIP}/admin/"
+>>>>>>> 3650b9d94c7bc4618047a89c70c62c514a7d26ba
 
 # Display generated password if it was randomly generated
 if [ -z "$PIHOLE_PASSWORD" ]; then
     echo -e "\n$(sudo docker logs pihole 2> /dev/null | grep 'password:') for your pi-hole"
+<<<<<<< HEAD
 fi
+=======
+fi
+>>>>>>> 3650b9d94c7bc4618047a89c70c62c514a7d26ba

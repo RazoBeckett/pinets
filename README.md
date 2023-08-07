@@ -15,13 +15,16 @@ These instructions will help you set up PiNets on your system.
 ### Prerequisites
 
 - Docker and Docker Compose are required for running the containers. If not installed, follow the instructions for [Docker](https://docs.docker.com/get-docker/) and [Docker Compose](https://docs.docker.com/compose/install/).
+- For debain based(ubuntu):
+  ```sh
+  sudo apt update && sudo apt install docker.io docker-compose git -y
 
 ### Installation
 
 1. Clone this repository to your local machine:
 
    ```sh
-   git clone https://github.com/razobeckett/PiNets.git
+   git clone https://github.com/razobeckett/pinets.git
 
 2. Navigate to the project directory:
 
@@ -32,7 +35,7 @@ These instructions will help you set up PiNets on your system.
 
    ```sh
    sudo chmod u+x setup.sh
-   ./setup.sh
+   sudo ./setup.sh
 
 ### Contributing
 Contributions are welcome! If you find any issues or have suggestions, feel free to open an issue or create a pull request.
