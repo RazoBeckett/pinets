@@ -2,6 +2,7 @@ version: "3.3"
 services:
   pihole:
     container_name: pihole
+    hostname: Pinets-RazoBeckett
     image: pihole/pihole:latest
     ports:
       - "53:53/tcp"
@@ -12,7 +13,7 @@ services:
     environment:
       TZ: $TIMEZONE # set your time zone
       WEBPASSWORD: $PIHOLE_PASSWORD
-      PIHOLE_DNS_: "10.11.12.4;10.11.12.3" # Custom upstream DNS servers in our case we are using Unbound and Cloudflared container/service.
+      PIHOLE_DNS_: "10.11.12.3;10.11.12.4" # Custom upstream DNS servers in our case we are using Unbound and Cloudflared container/service.
     volumes:
       - "~/docker_stuff/pihole/etc/pihole/:/etc/pihole/"
       - "~/docker_stuff/pihole/etc/dnsmasq.d/:/etc/dnsmasq.d/"
@@ -20,7 +21,7 @@ services:
       - 127.0.0.1
       - 1.1.1.1
     networks:
-      picertnet:
+      pinets:
         ipv4_address: 10.11.12.2 # Assign an IP address within the custom subnet
     restart: unless-stopped
 
@@ -43,18 +44,16 @@ services:
   #--------------------------------------------------------------------
 
   cloudflared:
-    image: visibilityspots/cloudflared:latest
+    image: cloudflare/cloudflared:latest
     container_name: cloudflared
     networks:
       pinets:
         ipv4_address: 10.11.12.4 # Assign an IP address within the custom subnet
     environment:
         TZ: $TIMEZONE
-        UPSTREAM1: $UPSTREAM1
-        UPSTREAM2: $UPSTREAM2
     volumes:
       - ~/docker_stuff/cloudflared/config:/etc/cloudflared # Map the config directory to the container's /etc/cloudflared directory
-    #command: ["proxy-dns", "--address", "0.0.0.0"]
+    command: ["proxy-dns", "--address", "0.0.0.0", "--upstream", "$UPSTREAM1", "--upstream", "$UPSTREAM2"]
     restart: unless-stopped
 
   #--------------------------------------------------------------------
