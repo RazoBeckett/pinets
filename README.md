@@ -1,4 +1,4 @@
-# PiNets: PiHole + Unbound + Cloudflared
+# PiNets: [PiHole](https://github.com/pi-hole/docker-pi-hole/) + [Unbound](https://github.com/MatthewVance/unbound-docker) + [Cloudflared](https://github.com/cloudflare/cloudflared)
 
 PiNets is a project that combines PiHole, Unbound, and Cloudflared to create a secure and efficient network-wide ad-blocking and DNS-over-HTTPS solution.
 
@@ -37,8 +37,18 @@ These instructions will help you set up PiNets on your system.
    sudo chmod u+x setup.sh
    sudo ./setup.sh
 
-### Contributing
+## Notes
+- By default, Unbound uses Quad9 as the upstream DNS provider, as Quad9 states, "We are a Swiss organization, which legally obligates us not to log Personally Identifiable Information (PII) such as source IP addresses."
+- This choice offers both security and safety for usage.
+- DNSSEC is also not enabled separately, as Quad9 handles DNSSEC when we use their services.
+## Contributing
 Contributions are welcome! If you find any issues or have suggestions, feel free to open an issue or create a pull request.
 
-### License 
-This project is licensed under the MIT License 
+## License 
+This project is licensed under the MIT License.
+
+### Licenses for other components
+
+- Docker: [Apache 2.0](https://github.com/docker/docker/blob/master/LICENSE)
+- Unbound: [BSD License](https://unbound.nlnetlabs.nl/svn/trunk/LICENSE)
+- Cloudflared [Apache 2.0](https://github.com/cloudflare/cloudflared/blob/master/LICENSE)
