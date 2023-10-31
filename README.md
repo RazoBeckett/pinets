@@ -19,6 +19,8 @@ These instructions will help you set up PiNets on your system.
   ```sh
   sudo apt update && sudo apt install docker.io docker-compose git -y
   ```
+  > __Note__
+  > This is just quick & easy way of install docker and docker-compose, I suggest you to follow the [**Official Installation Guide**](https://docs.docker.com/engine/install/).
 
 ### Installation
 
@@ -157,11 +159,10 @@ These instructions will help you set up PiNets on your system.
 
 Remember that DNS settings might require some time to propagate and take effect across your network. If you encounter issues, ensure that you've configured the DNS settings correctly and that your devices are properly connected to the network where PiNets is running.
 
-## Notes
-
-- By default, Unbound uses Quad9 as the upstream DNS provider, as Quad9 states, "We are a Swiss organization, which legally obligates us not to log Personally Identifiable Information (PII) such as source IP addresses."
-- This choice offers both security and safety for usage.
-- DNSSEC is also not enabled separately, as Quad9 handles DNSSEC when we use their services.
+> __Note__
+> - By default, Unbound uses Quad9 as the upstream DNS provider, as Quad9 states, "We are a Swiss organization, which legally obligates us not to log Personally Identifiable Information (PII) such as source IP addresses."
+> - This choice offers both security and safety for usage.
+> - DNSSEC is also not enabled separately, as Quad9 handles DNSSEC when we use their services.
 
 ## Contributing
 
